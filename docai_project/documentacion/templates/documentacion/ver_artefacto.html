@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ artefacto.titulo }} | {{ artefacto.get_tipo_display }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="mb-4">
+        <h2 class="text-primary">{{ artefacto.titulo }}</h2>
+        <h5 class="text-muted">{{ artefacto.get_tipo_display }}</h5>
+        <hr>
+        <p class="fs-5">{{ artefacto.contenido }}</p>
+    </div>
+    
+    <div class="mt-5">
+        <h4 class="mb-3">Evaluaciones de Coherencia</h4>
+        {% if evaluaciones %}
+            <ul class="list-group">
+                {% for eval in evaluaciones %}
+                    <li class="list-group-item">
+                        <strong>BLEU:</strong> {{ eval.puntuacion_bleu }} &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <strong>ROUGE:</strong> {{ eval.puntuacion_rouge }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="alert alert-info">No hay evaluaciones aún.</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

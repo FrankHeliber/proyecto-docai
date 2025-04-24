@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(135deg, #e0eafc, #cfdef3);
+        min-height: 100vh;
+    }
+
+    .card {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        border-radius: 12px;
+    }
+
+    .btn-primary {
+        border-radius: 12px;
+        background-color: #4a90e2;
+        font-weight: 600;
+        transition: 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #357ABD;
+    }
+
+    .form-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+    .form-subtext {
+        font-size: 0.95rem;
+    }
+
+    .icon-input {
+        position: relative;
+    }
+
+    .icon-input i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #aaa;
+    }
+
+    .icon-input input {
+        padding-left: 40px;
+    }
+</style>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card p-4">
+                <div class="card-body">
+                    <h2 class="form-title text-center mb-4">Crear cuenta</h2>
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                        {% endif %}
+
+                        {% for field in form %}
+                            <div class="mb-3 icon-input">
+                                {% if field.name == 'username' %}
+                                    <i class="bi bi-person"></i>
+                                {% elif field.name == 'email' %}
+                                    <i class="bi bi-envelope"></i>
+                                {% elif field.name == 'password1' or field.name == 'password2' %}
+                                    <i class="bi bi-lock"></i>
+                                {% endif %}
+                                {{ field.label_tag }}
+                                {{ field|add_class:"form-control" }}
+                                {% if field.errors %}
+                                    <div class="text-danger small">{{ field.errors }}</div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                        <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+                    </form>
+
+                    <p class="text-center mt-3 form-subtext">
+                        ¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
