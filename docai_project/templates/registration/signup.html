@@ -6,6 +6,9 @@
 
 {% block content %}
 <style>
+    .myDiv {    
+    text-align: center;
+    }
     body {
         background: linear-gradient(135deg, #e0eafc, #cfdef3);
         min-height: 100vh;
@@ -15,6 +18,7 @@
         border: none;
         border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        
     }
 
     .form-control {
@@ -64,6 +68,10 @@
         <div class="col-md-6 col-lg-5">
             <div class="card p-4">
                 <div class="card-body">
+                    <div class="myDiv">
+                        <img src="{% static 'img/registro-icon.png' %}" alt="Avatar de usuario" class="rounded-circle mb-3" width="´70" height="70">
+                    </div>
+                    
                     <h2 class="form-title text-center mb-4">Crear cuenta</h2>
 
                     <form method="post" novalidate>

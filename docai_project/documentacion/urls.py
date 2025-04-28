@@ -13,5 +13,6 @@ urlpatterns = [
     path('proyecto/<int:proyecto_id>/', views.detalle_proyecto, name='detalle_proyecto'),
     path('proyecto/<int:proyecto_id>/artefacto/nuevo/', views.crear_artefacto, name='crear_artefacto'),
     path('artefacto/<int:artefacto_id>/', views.ver_artefacto, name='ver_artefacto'),
-    
+    path('proyecto/<int:pk>/editar/', views.editar_proyecto, name='editar_proyecto'), # este codigo se agrego para el editar
+
 ]

@@ -5,6 +5,9 @@
 
 {% block content %}
 <style>
+    .myDiv {    
+    text-align: center;
+    }
     body {
         background-color: #f4f6f9;
     }
@@ -16,6 +19,7 @@
         background-color: #ffffff;
         border-radius: 15px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        
     }
 
     .login-box h2 {
@@ -53,14 +57,17 @@
 </style>
 
 <div class="login-box">
+    <div class="myDiv">
+        <img src="{% static 'img/user-icon.png' %}" alt="Avatar de usuario" class="rounded-circle mb-3" width="70" height="70">
+    </div>
     <h2>Iniciar sesión</h2>
     <form method="post" novalidate>
         {% csrf_token %}
-        <div class="mb-4">
+        <div class="mb-3">
             {{ form.username.label_tag }}
             {{ form.username|add_class:"form-control" }}
         </div>
-        <div class="mb-4">
+        <div class="mb-3">
             {{ form.password.label_tag }}
             {{ form.password|add_class:"form-control" }}
         </div>

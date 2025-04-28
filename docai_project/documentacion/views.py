@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Project, Artefacto, EvaluacionCoherencia
 from .forms import ProjectForm, ArtefactoForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+#from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm  # no UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from core.ia import generar_artefacto_con_ia
+
 
 @login_required
 def dashboard(request):
@@ -72,15 +74,30 @@ def cerrar_sesion(request):
     logout(request)
     return redirect('home')  # o la página que desees
 
+#def signup(request):
+#    if request.method == 'POST':
+#        form = UserCreationForm(request.POST)
+#        if form.is_valid():
+#            user = form.save()
+#            # Autenticación automática
+#            user.backend = 'django.contrib.auth.backends.ModelBackend'
+#            login(request, user) #solo este estado
+#            return redirect('/') #solo este estado
+#    else:
+#        form = UserCreationForm()
+#    return render(request, 'registration/signup.html', {'form': form})
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            user.email = form.cleaned_data['email']  # guardar email
+            user.save()
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
-            return redirect('/')
+            return redirect('home')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
 
 #def lista_proyectos(request):
@@ -90,4 +107,14 @@ def signup(request):
 def lista_proyectos(request):
     proyectos = Project.objects.filter(propietario=request.user)
     return render(request, 'documentacion/lista_proyectos.html', {'proyectos': proyectos})
-
+# codigo para editar proyecto
+def editar_proyecto(request, pk):
+    proyecto = get_object_or_404(Project, pk=pk)
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, instance=proyecto)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_proyectos')
+    else:
+        form = ProjectForm(instance=proyecto)
+    return render(request, 'documentacion/editar_proyecto.html', {'form': form, 'proyecto': proyecto})
