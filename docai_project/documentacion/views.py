@@ -74,18 +74,7 @@ def cerrar_sesion(request):
     logout(request)
     return redirect('home')  # o la página que desees
 
-#def signup(request):
-#    if request.method == 'POST':
-#        form = UserCreationForm(request.POST)
-#        if form.is_valid():
-#            user = form.save()
-#            # Autenticación automática
-#            user.backend = 'django.contrib.auth.backends.ModelBackend'
-#            login(request, user) #solo este estado
-#            return redirect('/') #solo este estado
-#    else:
-#        form = UserCreationForm()
-#    return render(request, 'registration/signup.html', {'form': form})
+
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -100,8 +89,7 @@ def signup(request):
         form = CustomUserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
 
-#def lista_proyectos(request):
-   # return render(request, 'documentacion/lista_proyectos.html')  # Asegúrate de tener este template
+
    
 @login_required
 def lista_proyectos(request):

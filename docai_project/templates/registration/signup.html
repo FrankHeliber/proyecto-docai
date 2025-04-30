@@ -5,74 +5,16 @@
 {% block title %}Registro{% endblock %}
 
 {% block content %}
-<style>
-    .myDiv {    
-    text-align: center;
-    }
-    body {
-        background: linear-gradient(135deg, #e0eafc, #cfdef3);
-        min-height: 100vh;
-    }
 
-    .card {
-        border: none;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        
-    }
-
-    .form-control {
-        border-radius: 12px;
-    }
-
-    .btn-primary {
-        border-radius: 12px;
-        background-color: #4a90e2;
-        font-weight: 600;
-        transition: 0.3s ease;
-    }
-
-    .btn-primary:hover {
-        background-color: #357ABD;
-    }
-
-    .form-title {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #2c3e50;
-    }
-
-    .form-subtext {
-        font-size: 0.95rem;
-    }
-
-    .icon-input {
-        position: relative;
-    }
-
-    .icon-input i {
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #aaa;
-    }
-
-    .icon-input input {
-        padding-left: 40px;
-    }
-</style>
-
-<div class="container py-5">
+<div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
             <div class="card p-4">
                 <div class="card-body">
-                    <div class="myDiv">
-                        <img src="{% static 'img/registro-icon.png' %}" alt="Avatar de usuario" class="rounded-circle mb-3" width="´70" height="70">
+                    <div class="card-body text-center">
+                        <img src="{% static 'img/registro-icon.png' %}" alt="Avatar de usuario" class="rounded-circle shadow-sm" width="70" height="70">
                     </div>
-                    
-                    <h2 class="form-title text-center mb-4">Crear cuenta</h2>
+                    <h2 class="fw-bold text-primary text-center mt-3">Crear cuenta</h2>
 
                     <form method="post" novalidate>
                         {% csrf_token %}
