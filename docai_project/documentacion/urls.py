@@ -8,7 +8,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('proyecto/nuevo/', views.crear_proyecto, name='crear_proyecto'),
-    path('proyectos/', views.lista_proyectos, name='lista_proyectos'),
+    path('proyectos/', views.dashboard, name='dashboard'),
     path('logout/', views.cerrar_sesion, name='logout'),  # 👈 importante
     path('proyecto/<int:proyecto_id>/', views.detalle_proyecto, name='detalle_proyecto'),
     path('proyecto/<int:proyecto_id>/artefacto/nuevo/', views.crear_artefacto, name='crear_artefacto'),

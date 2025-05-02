@@ -21,7 +21,7 @@ def crear_proyecto(request):
             proyecto = form.save(commit=False)
             proyecto.propietario = request.user  # Asume que el usuario está logueado
             proyecto.save()
-            return redirect('lista_proyectos')  # Cambia según el nombre de tu vista/lista
+            return redirect('dashboard')  # Cambia según el nombre de tu vista/lista
     else:
         form = ProjectForm()
     return render(request, 'documentacion/crear_proyecto.html', {'form': form})
